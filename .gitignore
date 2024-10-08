@@ -1,5 +1,5 @@
 # Node modules
-../node_modules/
+node_modules/
 
 # IDE specific files
 .vscode/
@@ -7,3 +7,9 @@
 
 # Environment variables
 .env
+
+# Config files
+.eslintrc.js
+babel.config.js
+package.json
+package-lock.json
