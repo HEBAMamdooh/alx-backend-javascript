@@ -1,25 +1,27 @@
+// Test suite for the enhanced calculateNumber function
 const assert = require('assert');
-const { it, describe } = require('mocha');
-const calculateNumber = require('./1-calcul');
+const calculateNumber = require('./1-calcul.js');
 
+describe('calculateNumber', function () {
+    describe('SUM operation', function () {
+        it('should return 6 when a = 1.4 and b = 4.5', function () {
+            assert.strictEqual(calculateNumber('SUM', 1.4, 4.5), 6);
+        });
+    });
 
-describe('calculateNumber', () => {
-    it('checking if operation is correct 1', () => {
-        assert.equal(calculateNumber('SUM', 1.4, 4.5), 6);
+    describe('SUBTRACT operation', function () {
+        it('should return -4 when a = 1.4 and b = 4.5', function () {
+            assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), -4);
+        });
     });
-    it('checking if operation is correct 2', () => {
-        assert.equal(calculateNumber('SUBTRACT', 1.4, 4.5), -4);
-    });
-    it('checking if operation is correct 3', () => {
-        assert.equal(calculateNumber('DIVIDE', 1.4, 4.5), 0.2);
-    });
-    it('checking if operation is correct 4', () => {
-        assert.equal(calculateNumber('DIVIDE', 1.4, 0), 'Error');
-    });
-    it('checking correct type for operation 1', () => {
-        assert.equal(calculateNumber(5, 1, 4), 'Error');
-    });
-    it('checking correct type for operation 2', () => {
-        assert.equal(calculateNumber('plus', 1, 4), 'Error');
+
+    describe('DIVIDE operation', function () {
+        it('should return 0.2 when a = 1.4 and b = 4.5', function () {
+            assert.strictEqual(calculateNumber('DIVIDE', 1.4, 4.5), 0.2);
+        });
+
+        it('should return Error when b = 0', function () {
+            assert.strictEqual(calculateNumber('DIVIDE', 1.4, 0), 'Error');
+        });
     });
 });

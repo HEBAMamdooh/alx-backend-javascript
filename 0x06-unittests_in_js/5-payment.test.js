@@ -1,26 +1,27 @@
-const { expect } = require('chai');
-const { it, describe } = require('mocha');
+// Test suite with hooks (beforeEach, afterEach)
 const sinon = require('sinon');
-
-const Utils = require('./utils.js');
+const assert = require('assert');
+const Utils = require('./utils');
 const sendPaymentRequestToApi = require('./5-payment.js');
 
-describe('', () => {
-  let spyBoy;
-  beforeEach(() => {
-    spyBoy = sinon.spy(console, 'log');
+describe('sendPaymentRequestToApi with hooks', function () {
+  let spy;
+
+  beforeEach(function () {
+    spy = sinon.spy(console, 'log'); // Set up the spy before each test
   });
-  afterEach(() => {
-    sinon.restore();
+
+  afterEach(function () {
+    spy.restore();  // Clean up the spy after each test
   });
-  it('checking if numbers round with spies and stubs 1st', () => {
+
+  it('should log the correct total when totalAmount = 100 and totalShipping = 20', function () {
     sendPaymentRequestToApi(100, 20);
-    expect(spyBoy.calledOnce).to.be.true;
-    expect(spyBoy.calledWith('The total is: 120')).to.be.true;
+    assert(spy.calledOnceWithExactly('The total is: 120'));
   });
-  it('checking if numbers round with spies and stubs 2nd', () => {
+
+  it('should log the correct total when totalAmount = 10 and totalShipping = 10', function () {
     sendPaymentRequestToApi(10, 10);
-    expect(spyBoy.calledOnce).to.be.true;
-    expect(spyBoy.calledWith('The total is: 20')).to.be.true;
+    assert(spy.calledOnceWithExactly('The total is: 20'));
   });
 });

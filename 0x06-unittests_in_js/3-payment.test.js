@@ -1,16 +1,15 @@
-const { expect } = require('chai');
-const { it, describe } = require('mocha');
+// Test suite for sendPaymentRequestToApi using Sinon spy
 const sinon = require('sinon');
-
-const Utils = require('./utils.js');
+const assert = require('assert');
+const Utils = require('./utils');
 const sendPaymentRequestToApi = require('./3-payment.js');
 
-describe('', () => {
-  it('checking if numbers round with spies', () => {
-    const checkSoy = sinon.spy(Utils, 'calculateNumber');
-    sendPaymentRequestToApi(1, 3);
-    expect(checkSoy.calledOnce).to.be.true;
-    expect(checkSoy.calledWith('SUM', 1, 3)).to.be.true;
-    checkSoy.restore();
+describe('sendPaymentRequestToApi', function () {
+  it('should call Utils.calculateNumber with correct arguments', function () {
+    const spy = sinon.spy(Utils, 'calculateNumber');
+    sendPaymentRequestToApi(100, 20);
+
+    assert(spy.calledOnceWithExactly('SUM', 100, 20));
+    spy.restore(); // Restore the spy after test
   });
 });
